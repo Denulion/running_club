@@ -1,6 +1,7 @@
 package lt.techin.service;
 
 import lt.techin.model.RunningEvent;
+import lt.techin.model.User;
 import lt.techin.repository.RunningEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,4 +38,8 @@ public class RunningEventService {
     public Optional<RunningEvent> findRunningEventById(Long eventId) {
         return runningEventRepository.findById(eventId);
     }
+
+//    public List<User> findUsersByEventId(long id) {
+//        return runningEventRepository.findByRunningEvent_Id(id);
+//    }
 }

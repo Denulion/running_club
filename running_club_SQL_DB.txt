@@ -18,7 +18,7 @@ CREATE TABLE registrations(
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id BIGINT,
     running_event_id BIGINT,
-    registration_date DATETIME,
+    registration_date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (running_event_id) REFERENCES running_events(id)
 );

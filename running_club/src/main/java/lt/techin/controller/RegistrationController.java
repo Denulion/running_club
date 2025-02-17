@@ -15,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class RegistrationController {
@@ -36,8 +38,25 @@ public class RegistrationController {
         if (!runningEventService.existsById(eventId)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not Found");
         }
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //User user = userService.findUserById(registrationRequestDTO.user()).get();
+
+        if (!userService.existsUserById(registrationRequestDTO.user().getId())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User does not exist");
+        }
+
+        User user = (User) authentication.getPrincipal();
+
+        if (user.getId() != registrationRequestDTO.user().getId()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You can't register other users!");
+        }
+
+        List<Registration> registrations = registrationService.getRegistrationsByUserId(user.getId());
+
+        for (Registration registration : registrations) {
+            if (runningEventService.existsById(eventId)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You are already registered for this event!");
+            }
+        }
+
         RunningEvent runningEvent = runningEventService.findRunningEventById(eventId).get();
 
         Registration registration = RegistrationRequestMapper.toRegistration(registrationRequestDTO, runningEvent);
