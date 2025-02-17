@@ -1,6 +1,6 @@
 package lt.techin.dto;
 
-public class RoleDTO {
+public record RoleDTO(String name) {
 
 
 }

@@ -1,4 +1,8 @@
 package lt.techin.dto;
 
-public record UserResponseDTO() {
+import java.util.List;
+
+public record UserResponseDTO(long id,
+                              String username,
+                              List<RoleDTO> roles) {
 }

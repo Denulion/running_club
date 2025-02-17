@@ -1,6 +1,10 @@
 package lt.techin.dto;
 
+import lt.techin.model.User;
+
 public class UserResponseMapper {
 
-
+    public static UserResponseDTO toUserResponseDTO(User user) {
+        return new UserResponseDTO(user.getId(), user.getUsername(), RoleMapper.toRoleDTOList(user));
+    }
 }

@@ -1,6 +1,11 @@
 package lt.techin.repository;
 
-public interface RunningEventRepository {
+import lt.techin.model.RunningEvent;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RunningEventRepository extends JpaRepository<RunningEvent, Long> {
 
 
 }

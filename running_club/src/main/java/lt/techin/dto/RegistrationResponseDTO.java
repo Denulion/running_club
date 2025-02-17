@@ -1,6 +1,10 @@
 package lt.techin.dto;
 
-public class RegistrationResponseDTO {
+import java.time.LocalDate;
 
+public record RegistrationResponseDTO(long id,
+                                      long user_id,
+                                      String eventName,
+                                      LocalDate registrationDate) {
 
 }
